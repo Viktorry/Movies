@@ -1,7 +1,7 @@
 <?php
 /*require ("./Model/Model.php");*/
-require $_SERVER['DOCUMENT_ROOT'] . '/Model/Model.php';
 include 'Messagetraints.php';
+Message::modelPath();
 
 class Controller
 {

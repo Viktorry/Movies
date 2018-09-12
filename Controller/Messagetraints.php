@@ -31,4 +31,18 @@ trait Message
     {
         header("Location: /Views/HomePage.php");
     }
+
+    public static function modelPath()
+    {
+        require $_SERVER['DOCUMENT_ROOT'] . '/Model/Model.php';
+    }
+    public static function imagePath()
+    {
+        $_SERVER['DOCUMENT_ROOT'] . "/Views/img/";
+    }
+    public static function controllerPath()
+    {
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/Controller/Controller.php';
+
+    }
 }

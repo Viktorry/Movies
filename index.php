@@ -4,8 +4,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $page = $_GET['page'];
-
-require_once "Controller/Controller.php";
+include 'Messagetraints.php';
+Message::ControllerPath();
 require_once "Controller/UploadPicture.php";
 require_once "Controller/UploadVideo.php";
 

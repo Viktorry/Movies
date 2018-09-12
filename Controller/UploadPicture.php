@@ -6,7 +6,7 @@ class UploadPicture
     {
         if (isset($_POST['upload'])) {
             $image = $_FILES['image']['name'];
-            $target = $_SERVER['DOCUMENT_ROOT'] . "/Views/img/" . basename($image);
+            $target = Message::imagePath().basename($image);
             move_uploaded_file($_FILES["image"]["tmp_name"], $target);
             $insert = new Model();
             $inspic = $insert->insertPictures($image);

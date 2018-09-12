@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Controller/Controller.php';
+include 'Messagetraints.php';
+Message::controllerPath();
 ?>
 
 <!DOCTYPE html>

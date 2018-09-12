@@ -7,7 +7,7 @@ class uploadVideo
         if (isset($_POST['submit'])) {
             $name = $_FILES['file']['name'];
             $temp = $_FILES['file']['tmp_name'];
-            $target = $_SERVER['DOCUMENT_ROOT'] . "/Views/img/";
+            $target = Message::imagePath();
             move_uploaded_file($temp, $target . $name);
             $url = "http://127.0.0.1/PHP/video%20upload%20and%20playback/img/$name";
             $upl = new Model();

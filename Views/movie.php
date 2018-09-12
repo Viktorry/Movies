@@ -1,6 +1,7 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Controller/Controller.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/Model/Movie.php';
+include 'Messagetraints.php';
+Message::controllerPath();
+Message::modelPath();
 ?>
 <!DOCTYPE html>
 <html lang="en">
