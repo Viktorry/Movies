@@ -9,8 +9,8 @@ class DB
 
         $settings['dbname'] = 'Movies';
         $settings['dbhost'] = '127.0.0.1';
-        $settings['dbuser'] = 'viktor';
-        $settings['dbpass'] = 'user123';
+        $settings['dbuser'] = '';
+        $settings['dbpass'] = '';
 
         try {
             $dsn = 'mysql:dbname=' . $settings['dbname'] . ';host=' . $settings['dbhost'];
