@@ -6,7 +6,6 @@ ini_set('display_errors', 1);
 $page = $_GET['page'];
 
 
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/public_html/Controller/Controller.php';
 require_once "Controller/UploadPicture.php";
 require_once "Controller/UploadVideo.php";
@@ -16,28 +15,55 @@ $upl = new uploadVideo();
 $uplPic = new uploadPicture();
 
 
-$routeArray = array('user'=> 'getAll()' ,'showmoviesform' => 'showInsertForm()','showadminspage'=> $controller->showAdminPage(),'insertmovie'=>$controller->insertMovie(),
-    'insertgenre'=>$controller->insertGenre(),'insertactor'=>  $controller->insertActors(),'showactorsform'=> $controller->showActorsInsertForm(),'showActors'=>$controller->showActorsInsertForm(),
-    'showActors'=> $controller->showActortable(),'showUsers' =>  $controller->showUserstable(), 'showMovies'=>  $controller->showMovietable(),'showGenres'=> $controller->showGenretable(),
-    'showgenres'=> $controller->showGenres(),'showmovies'=> $controller->showMovies(),'deletemovie'=>$controller->deleteMovies(),'deleteactor'=> $controller->deleteActor(),
-    'deletegenre'=>$controller->deleteGenre(),'updatemovie'=> $controller->updateMovie(),'updategenre'=> $controller->updateGenres(),'editmovie'=> $controller->editMovie(),
-    'editactor'=> $controller->editActor(),'editgenre'=>$controller->editGenre(),'updateactor'=> $controller->updateActor(),'jsonMovies'=> $controller->showMoviesJson(),
-    'jsonActors'=>  $controller->showActorsJson(),'jsonGenres'=> $controller->showGenresJson(),'jsonUsers'=>  $controller->showUsersJson(),'updatepicture'=> $controller->showPictupt(),
-    'showgenresform'=> $controller->showGenresForm(),'insertactorsinmovies'=>$controller->insertActorsinMovies(),'insertgenresinmovies'=>  $controller->insertGenresinMovies(),'login'=>$controller->login(),
-    'register'=> $controller->register(),'logout'=> $controller->logout(),'uplvideo'=> $upl->uploadVideo(),'uploadpicture'=> $uplPic->uploadPicture(),'usershomepage'=> $controller->showUsersHomePage(),
-    'showhomepage'=>$controller->showHomePage(),'showmovie'=> $controller->showMovie(), 'showadminspage'=>$controller->showAdminPage(),'showadminshomepage'=>$controller->showAdminPage(),
-    'showadminshomepage'=>$controller->showAdminsHomePage());
-foreach ($routeArray as $ra) {
-    if (in_array($page) && array_key_exists($page,$routeArray) ){
-        echo "valja!";
-    }
+$routeControllerArray = array('user' => 'getAll', 'showmoviesform' => 'showInsertForm', 'showadminspage' => 'showAdminPage', 'insertmovie' => 'insertMovie',
+    'insertgenre' => 'insertGenre', 'insertactor' => 'insertActors', 'showactorsform' => 'showActorsInsertForm', 'showActors' => 'showActorsInsertForm',
+    'showActors' => "showActortable", 'showUsers' => 'showUserstable', 'showMovies' => 'showMovietable', 'showGenres' => 'showGenretable',
+    'showgenres' => 'showGenres', 'showmovies' => 'showMovies', 'deletemovie' => 'deleteMovies', 'deleteactor' => 'deleteActor',
+    'deletegenre' => 'deleteGenre', 'updatemovie' => 'updateMovie', 'updategenre' => 'updateGenres', 'editmovie' => 'editMovie',
+    'editactor' => 'editActor', 'editgenre' => 'editGenre', 'updateactor' => 'updateActor', 'jsonMovies' => 'showMoviesJson',
+    'jsonActors' => 'showActorsJson', 'jsonGenres' => 'showGenresJson', 'jsonUsers' => 'showUsersJson',
+    'showgenresform' => 'showGenresForm', 'insertactorsinmovies' => 'insertActorsinMovies', 'insertgenresinmovies' => 'insertGenresinMovies', 'login' => 'login',
+    'register' => 'register', 'logout' => 'logout', 'usershomepage' => 'showUsersHomePage',
+    'showhomepage' => 'showHomePage', 'showmovie' => 'showMovie', 'showadminspage' => 'showAdminPage', 'showadminshomepage' => 'showAdminPage', 'searchmovie' => 'searchMovie');
+$routePictureArray = array('uploadpicture' => 'uploadPicture');
+$routeVideoArray = array('uplvideo' => 'uploadVideo');
+
+
+if (!isset($page)) {
+    header('Location: index.php?page=showhomepage');
+
 }
+if (array_key_exists($page, $routeControllerArray)) {
+    $page = $_GET['page'];
+    foreach ($routeControllerArray as $raName => $raValue) {
+        if ($raName === $page) {
+            $msg = $raValue;
+            // print_r($msg);
+            $controller->{$msg}();
+        }
+    }
+} elseif (array_key_exists($page, $routePictureArray)) {
+    foreach ($routePictureArray as $raName => $raValue) {
+        if ($raName === $page) {
+            $msg = $raValue;
+            $uplPic->{$msg}();
+        }
+    }
+} elseif (array_key_exists($page, $routeVideoArray)) {
+    foreach ($routeVideoArray as $raName => $raValue) {
+        $msg = $raValue;
+        $upl->{$msg}();
+    }
+
+}
+
 
 
 
 /*if (!isset($page)) {
     header('Location: index.php?page=showhomepage');
 }
+
 
 switch ($page) {
     case 'user':
@@ -163,6 +189,5 @@ switch ($page) {
     default:
         die('404');
         break;
-}
+}*/
 
-*/?>

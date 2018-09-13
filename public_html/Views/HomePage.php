@@ -106,6 +106,15 @@ Message::modelPath();
     </div>
 </nav>
 <div class="container padding">
+    <form method="post" action="index.php?page=searchmovie">
+        <div class="input-group">
+            <input type="text" name="search" placeholder="Search">
+        </div>
+
+        <div class="input-group">
+            <button type="submit" class="btn">Search Your Text</button>
+        </div>
+    </form>
     <?php
     $movie = new Model();
     $videos = $movie->getAllmovies();

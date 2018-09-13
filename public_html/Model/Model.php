@@ -26,6 +26,7 @@ class Model
     protected $userexistbyemail = "SELECT count(*) FROM users WHERE email = ?";
     protected $getvideosbyid = "SELECT * FROM videos WHERE id=?";
     protected $selectuserbypasswordandusername = "SELECT * FROM users WHERE username = ? AND pass = ?";
+    protected $searchMovie = "SELECT * FROM movies WHERE movies_name LIKE ? OR youtube LIKE ? OR ratings LIKE ? ";
     // Insert upiti
     protected $insertmovie = "INSERT INTO movies(movies_name, movies_date, duration_time,ratings,youtube,imdb, url) VALUES (?,?,?,?,?,?,?)";
     protected $insertActorsinMovies = "INSERT INTO actorsinmovies (actor_id,movies_id) VALUES (?,?)";
@@ -491,6 +492,20 @@ class Model
         $statement->bindValue(1, $genre);
         $statement->bindValue(2, $genres_id);
         $statement->execute();
+    }
+
+    /**
+     * @param $searchQuery
+     * @return array
+     */
+    public function searchMovie($searchQuery1)
+    {
+        $stm = $this->db->prepare($this->searchMovie);
+        $stm->bindValue(1, $searchQuery1);
+        $stm->bindValue(2, $searchQuery1);
+        $stm->bindValue(3, $searchQuery1);
+        $stm->execute();
+        return $stm->fetchall();
     }
 
 }

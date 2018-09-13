@@ -2,6 +2,7 @@
 /*require ("./Model/Model.php");*/
 include 'Messagetraints.php';
 Message::modelPath();
+Message::MoviePath();
 
 class Controller
 {
@@ -28,7 +29,6 @@ class Controller
 
     public function showInsertForm()
     {
-        session_start();
         if (isset($_SESSION['Loged in'])) {
             include("./Views/AddMovie.php");
         } else {
@@ -377,6 +377,25 @@ class Controller
         $movie = new Model();
         $mov = $movie->getMeoviesbyId($id);
         include("./Views/EditMovie.php");
+    }
+
+   public function searchMovie()
+    {
+        //$output='';
+        if (isset($_POST['search'])) {
+            $searchQuery = $_POST['search'];
+            $searchQuery1 = preg_replace("#[^0-9a-z]#i", "", "%{$searchQuery }%");
+            $movie = new Model();
+            $mov = $movie->searchMovie($searchQuery);
+            foreach ($mov as $m) {
+                ?><a
+                href="index.php?page=showmovie&id=<?php echo $m['movies_id'] ?>"><br><?php echo $m['movies_name'] ?></a>
+                <?php
+            }
+            include("./Views/SearchMovie.php");
+
+
+        }
     }
 
     public function editGenre()

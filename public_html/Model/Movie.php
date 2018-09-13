@@ -12,6 +12,7 @@ class Movie
     protected $genresQuery = "SELECT genres.* FROM movies  JOIN actorsgenresinmovies ON movies.movies_id = actorsgenresinmovies.movie_id JOIN genres ON genres.genres_id=actorsgenresinmovies.genre_id WHERE movies.movies_id = ?";
     protected $genresactorsmoviesQuery = "SELECT movies.*, actors.*, genres.* FROM movies  JOIN actorsgenresinmovies ON movies.movies_id = actorsgenresinmovies.movie_id JOIN actors ON actors.actor_id=actorsgenresinmovies.actor_id JOIN genres ON genres.genres_id = actorsgenresinmovies.genre_id WHERE movies.movies_id = ?";
 
+
     public function __construct($id)
     {
         $this->db = DB::createInstance();
@@ -58,4 +59,5 @@ class Movie
 
         return $stm->fetchAll();
     }
+
 }
